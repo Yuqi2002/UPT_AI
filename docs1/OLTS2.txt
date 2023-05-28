@@ -1,0 +1,187 @@
+How To Create Promotion Offers (OLTS)
+         Promotion Store Build
+                 Merchant
+                 Promotion
+                 SQL Trigger
+
+
+
+
+Promotion Store Build
+For this section, the initial build process will be very similar than that of creating any new traditional store within OLTS. The difference we will have is that a
+Promotion Code store will have the Merchant/Owner Link tabs set up a little differently, so that the page will be directing the user to a Promotion Code
+entry form before gaining access.
+
+
+        OLTS Store Build
+
+        That being said, please view the generic OLTS Store build for documentation on how to create a store from scratch. For the sake of brevity, this
+        guide will go over the specific differences between a Promotion Codes store and a Traditional store: Building a New Store (OLTS) [Page in
+        Progress]
+
+
+
+
+Merchant
+The Merchant will generally be new, with a new configuration to be used from PPI. For example, many of our stores use new merchants when created,
+however, please make sure to copy over our OLTS theme and update the Header Footer tabs inside of the Web Page tab under Merchant:
+
+
+
+
+Promotion
+This is the main section will be how we attach the store/merchant to a Promotion. The steps will lay out below what is needed to create.
+
+     1. Click on Sales Channel Maintenance Promotions.
+   2. Click on the Code Entry tab. Always ensure the check box on the top of this tab is checked — "Code Required For Entry". The second box for
+      text entry contains the text that the customer will see in front of the form on the entry page. Please see below screenshots:
+
+
+
+
+SQL Trigger
+
+SQL Trigger
+
+USE [OLTSProd]
+GO
+/****** Object: Trigger [dbo].[trUOWSPublishingLog_Insert]                      Script Date: 11/18/2020 11:45:30 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER TRIGGER        [dbo].[trUOWSPublishingLog_Insert]
+        ON                        [dbo].[WSPublishingLog]
+        AFTER INSERT
+AS
+/******************************************************************
+Copyright © 2020 Universal Orlando. All rights reserved.
+
+Description:         This trigger will be used to identify when a Web Store
+                                 Publish is occurring. To preserve promotion codes that
+                                 may have been manually inserted by Parks Technology,
+                                 this trigger will move the promotion codes to a "holding
+                                 table" until the Publish is complete. Afterward, the
+                                 promotion codes will be restored.
+
+Use Case:                 Marketing will be pushing out a promotional offer with
+                                 unique promotion codes (PIN) per guest. These codes
+                                 will have a limited one-time use, which is controlled
+                                 with the PromotionCodes.MaxUses field. If the code has
+                                 been used, this value will be [0]. If the code is still
+                                 available for use, this value will be [1] for a single use.
+
+DATE                INITIALS        DESCRIPTION
+00/00/0000        ABC                        Notes
+******************************************************************/
+
+DECLARE @iMessage                 VARCHAR(MAX)
+DECLARE @ID                                 INT
+
+SELECT                 @ID = WSPublishingLogID
+FROM                 inserted
+
+SELECT                 @iMessage = Message
+FROM                 WSPublishingLog
+WHERE                 WSPublishingLogID = @ID
+
+IF @iMessage LIKE 'MessageType = [[PUBLISH]%' ESCAPE '['
+BEGIN
+        IF ISNULL(OBJECT_ID('PromotionCodes_ActivePublishBackup', 'U'), 0) > 0
+                 DROP TABLE dbo.PromotionCodes_ActivePublishBackup
+        CREATE TABLE dbo.PromotionCodes_ActivePublishBackup
+        (         PromotionCodeID                 INT                PRIMARY KEY,
+                 PromotionID                          INT,
+                 Code                                  VARCHAR(50),
+                 MaxUses                                   INT,
+                 RecordVersion                 INT,
+                 LastUpdate                         DATETIME,
+                 LastUpdatedBy                 VARCHAR(20)                                        )
+        INSERT INTO          dbo.PromotionCodes_ActivePublishBackup
+                                  (PromotionCodeID, PromotionID, Code, MaxUses, RecordVersion, LastUpdate,
+LastUpdatedBy)
+        SELECT                   PromotionCodeID, PromotionID, Code, MaxUses, RecordVersion, LastUpdate,
+LastUpdatedBy
+        FROM                  dbo.PromotionCodes
+        ORDER BY         PromotionCodeID
+
+
+         INSERT INTO [dbo].[WSPublishingLog]
+
+            ([DateTime]
+            ,[LogLevel]
+            ,[ASPNetSessionID]
+            ,[CallSite]
+            ,[Message]
+            ,[StackTrace]
+            ,[RemoteAddress]
+            ,[HttpReferer]
+            ,[HttpUserAgent]
+            ,[WebServerIP])
+                 VALUES
+            (getDate()
+            ,'KIBANA'
+            ,''
+            ,''
+           ,'PROMOTION CODES added to PromotionCodes_ActivePublishBackup'
+           ,''
+           ,''
+           ,''
+           ,''
+           ,'')
+
+END
+
+/*IF @iMessage LIKE 'RunPublish() call to WebPublishing.PublishImport() complete'
+BEGIN
+        GOTO MERGEDATA;
+END
+IF @iMessage LIKE 'MessageType = [RELEASEPUBLISHTOKEN]%'
+BEGIN
+        GOTO MERGEDATA;
+END
+
+GOTO ENDTRIGGER;
+
+MERGEDATA:
+        MERGE dbo.PromotionCodes t
+                USING dbo.PromotionCodes_ActivePublishBackup s
+        ON t.PromotionCodeID = s.PromotionCodeID
+        WHEN MATCHED
+    THEN UPDATE SET
+        t.PromotionCodeID = s.PromotionCodeID,
+        t.PromotionID = s.PromotionID,
+                t.Code = s.Code,
+                t.MaxUses = s.MaxUses,
+                t.LastUpdate = s.LastUpdate
+        WHEN NOT MATCHED BY TARGET THEN
+                INSERT                 (PromotionCodeID, PromotionID, Code, MaxUses, RecordVersion, LastUpdate,
+LastUpdatedBy)
+                VALUES                 (s.PromotionCodeID, s.PromotionID, s.Code, s.MaxUses, s.RecordVersion, s.
+LastUpdate, s.LastUpdatedBy);
+
+        INSERT INTO [dbo].[WSPublishingLog]
+           ([DateTime]
+           ,[LogLevel]
+           ,[ASPNetSessionID]
+           ,[CallSite]
+           ,[Message]
+           ,[StackTrace]
+           ,[RemoteAddress]
+           ,[HttpReferer]
+           ,[HttpUserAgent]
+           ,[WebServerIP])
+        VALUES
+           (getDate()
+           ,'KIBANA'
+           ,''
+           ,''
+           ,'PROMOTION CODES added back to PromotionCodes'
+           ,''
+           ,''
+           ,''
+           ,''
+           ,'')
+*/
+ENDTRIGGER:
+

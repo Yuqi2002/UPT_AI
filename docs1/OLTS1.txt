@@ -1,0 +1,345 @@
+Building a New Store (OLTS) [Page in Progress]
+         1 Initial Store Build
+                    1.1 Category Group
+                    1.2 Attraction Identifier
+                    1.3 Merchant
+                    1.4 Sales Program
+                    1.5 Owner Link
+                    1.6 Transaction
+         2 Merchant Customization
+                    2.1 Description
+                    2.2 General
+                    2.3 Logo
+                    2.4 Web Page
+                             2.4.1 General
+                             2.4.2 Bookmark
+                             2.4.3 Header Footer
+                             2.4.4 Text Fields
+         3 Product Creation
+                    3.1 Dividers
+                    3.2 Category
+                    3.3 Redirect Script
+                    3.4 Sub-Category
+                    3.5 PLU
+         4 Misc. Knowledge
+                    4.1 PLU Names
+                    4.2 Promotions
+                    4.3 Card Controls
+                    4.4 Images
+
+
+
+Initial Store Build
+Building a new OLTS store requires very little information beforehand as most of the store including its name and URL can be changed and updated at any
+point. Many of the elements of OLTS are also shared between stores so it is advisable to copy and paste an existing store and modify the copy rather than
+having to start from scratch. The first step is creating the Category Group.
+
+
+Category Group
+
+
+
+
+A: Category Group is where you will put the name of the store. This field is not front facing but it is best practice to give it an identifiable name.
+
+Example: CG=UOMex
+B: External ID is REQUIRED and will become part of the URL to reach the front end portion of the website. Make sure to use an appropriate and easily
+recognizable name here, and DO NOT use any special characters or spaces (text and numbers only).
+
+Example: C=Mexico
+
+Use clients DBA
+C: Type can be left as blank/Standard unless otherwise noted.
+
+
+        Note
+
+        Short Name can be left blank and Effective Date can be last as any past calendar date.
+
+
+After creating the Category Group, ie your new store, you can begin cycling through the tabs at this level and modifying them as necessary.
+
+
+Attraction Identifier
+This tab is the same across all OLTS stores so it can be left the same as shown below.
+Merchant
+In this tab you will select the stores Merchant as well as its credit card Merchant. The Merchant for your store will control large parts of its appearance and
+navigation which will be further discussed in the Merchant Customization section. While you can use an existing Merchant, it is STRONGLY advised to use
+a new Merchant with a unique and identifiable name, though can choose to copy an existing Merchant and edit it. The Credit Card Merchant is also vitally
+important. With rare exception the Credit Card Merchant is the same across most OLTS stores so it is best to leave this alone.
+Sales Program
+The Sales Program you use here will determine the PLU's that can be added to your store. It may be necessary to speak with others in PPI or the
+Ecommerce team to determine what Sales Program to use if it has not already been decided.
+
+
+
+
+Owner Link
+For a standard OLTS store, you will select Merchant and choose the exact same Merchant as in the Merchant. Some stores however are used for
+displaying promos such as the Florida Resident Blue Man Group store, in which case you would choose Promotion and select the appropriate offer.
+
+
+
+
+Transaction
+This tab can be used to set a limit on the amount of any one specific product a customer can purchase. Transaction tabs at lower levels will override the
+settings on this tab. The limit per transaction should be 10.
+
+
+
+Web Page
+
+The Web Page tab allows you to attach Web Store HTML that will override those set within the Merchant. While this allows two stores to have the same
+Merchant but custom navigation, it is HIGHLY advised to avoid using this tab and instead create a unique Merchant for each store. NOTE: Any attached
+HTML files will not be visible unless the store is being actively edited. If you are uncertain if a store is making use of this tab, begin editing the store before
+checking.
+        Note
+
+        Fees, Upsell, Donations, Notifications, Descriptions, Image, Detail, and Marketing Message are often unused and can safely be ignored.
+
+
+                                                                                                                                                           Top
+
+
+
+Merchant Customization
+The Merchant is an important part of building and customizing an OLTS store. While an existing Merchant can be used with custom changes made in the
+stores Web Page tab, it is better for organization purposes to give each store its own unique Merchant, though you can copy an existing Merchant being
+used in OLTS and edit that rather than building a new one from scratch.
+
+For the stores "Code" (ie its name) any name can be given as this is only visible on the back end, though it is best practice to give the store a unique and
+easily recognizable name. The "Customer" is almost always UNIVERSAL ONLINE TICKET STORE unless otherwise noted, typically with cobranded
+stores (such as Priceline and Booking.com).
+
+
+
+
+Description
+This tab is usually left blank and can be ignored.
+
+
+General
+This tab is also typically blank, though most OLTS stores have "Prompt for Email Newsletter" enabled and make sure to include OnlineStoreHelp@univer
+salorlando.com in the "Customer Support URL" field.
+
+
+Logo
+The URL entered in this tab should be the same as in the Attraction Identifier Logo used earlier. Alternate image text can be used (typically "Universal
+Orlando Logo") but is not necessary. Preferred (max) size of 200 X 200 pixels and please provide in a png format.
+
+
+Web Page
+This is tab where you will make the majority of customization to your stores Merchant.
+
+       General
+      Insure "Auto Generate Navigation" is enabled and that you have a Web Theme (usually "UOMainOnline"). The rest of this tab can be ignored.
+
+      Bookmark
+      This tab can be left blank, however it can be used to redirect people away from your store until you are ready to make it visible to the public. Simply
+      enable the "Prevent Web Page Bookmarking" box, leave Redirect Method as Standard, and in Redirect URL enter the address you want visitors to
+      be taken to.
+
+      Header Footer
+      This is where the bulk of your stores customization will come from. These HTML files are created in "Web Store HTML" under Sales Channel
+      Maintenance and are attached in this tab. While you can build the HTML yourself, because the appearance of OLTS stores is consistent across all
+      the stores the simplest option is to copy and edit existing HTML files from other OLTS stores. Ensure that your Merchant has a file with an HTML
+      Kind of "Header" and "Footer" at the very least. The "Footer" used by most OLTS stores is "UOMainOnline Footer" and remains unchanged so you
+      can use this, but the Header you use will need to be customized to match your store, specifically the store name and the URL's used for the
+      navigation links (these elements are front facing).
+
+      Other HTML Kinds can also be used such as the "Hogwarts Express" Sub-Footer which is used by several OLTS stores and a Review Order file
+      called "Remove Pin Debit Option" (this latter file is used by nearly every OLTS store so make sure to include it).
+
+      As noted earlier you can also attach HTML files in the Web Page tab of your store in the Sales Channel and files attached there will override any
+      files here, but it is highly advised to AVOID doing this.
+
+
+        Note
+
+        As of 11/18/19, you must include the following two URL's in your Footer as part of CCPA requirements.
+
+        Privacy Policy (https://www.nbcuniversal.com/privacy?brandA=UO&intake=Universal_Orlando)
+
+        Do Not Sell My Personal Information (https://www.nbcuniversal.com/privacy/notrtoo?brandA=UO&intake=Universal_Orlando)
+
+
+      Text Fields
+      This tab is also important in attaching Text Field Groups which generate labels and fields necessary for the function of OLTS, such as the labels that
+      appear throughout the checkout process. Text Field Groups are created in Web Store Text Fields under Sales Channel maintenance, however
+      individual fields within the group cannot be added or removed, only modified. NOTE: As of 10/28/2019 there is a currently a known issue where after
+      a publish certain Text Fields will be missing labels from the front end of OLTS stores (specifically those in the Billing Info page). This is due to these
+      fields missing from Galaxy. Due to the inability to add new fields, the current solution requires running a SQL script in the OLTS database to add
+      these fields and their appropriate labels. This script however is written to effect existing Text Field Groups and as such it is HIGHLY
+      RECOMMENDED to only use Text Field Group "ID 55: UO-PF" until the issue is resolved.
+
+
+
+
+                                                                                                                                                            Top
+
+
+
+Product Creation
+Adding products to an OLTS store is fairly similar to other Sales Channels in Galaxy, however there are a few features and functions meant for
+organization and presentation that need to be kept in mind. NOTE: The order things are arranged in will be reflected on the front end.
+
+
+Dividers
+You can create category dividers to help organize the product navigation on the front end of your store.
+
+
+
+
+A: The divider as it appears in one OLTS store.
+B: The Category Name can be anything as long as it is HTML commented out. <!–NAME HERE-->
+C: The Short Name is what will appear on the front end as plain black text separating the clickable Category links. The text you will display must be
+surrounded by a <div id="none"><h5 class='nav-header'>TEXT HERE</h5></div> tag.
+D: The External ID is required however the specific name is not important and will not appear on the front end.
+
+Dividers can also be made Inline with a product by placing the dividers Short Name tag and text in front of the products Short Name. The pro to an Inline
+divider is when validating your store/OLTS there will be less errors as it will contain a lower level with a product in it whereas a separate divider does not
+contain products under it and will generate an error. The con is that organization becomes more difficult as it can be difficult to determine which Category is
+hosting the Inline divider.
+
+
+
+
+        Note
+
+        All of the individual tabs can be ignored.
+
+
+
+Category
+
+
+
+
+A: The Category as it appears in Sales Channel.
+B: The Category Name is the text that will display on the page listing all the products within that Category.
+C: The Short Name is the clickable link on the left hand navigation rail. Short Names must be surrounded by a <div id="indent">NAME HERE</div> tag.
+Inline Dividers will be placed before this div tag.
+D: The External ID is required and will form the rest of the stores URL along with the Category Groups External ID. For example, the External ID's shown
+throughout this guide form a url of https://purchaseqa.universalorlando.com/webstore/shop/ViewItems.aspx?CG=UOAPDis&C=APDisEve (External ID's in
+bold). Like with the Category Group External ID be sure to use appropriate and recognizable text here and avoid special characters and spaces.
+
+Much like dividers, most of the tabs can be ignored. You can however use the Transaction tab to overwrite settings in the Category Group's Transaction
+tab. Category Type can also be left alone.
+
+
+Redirect Script
+While not having as much functionality as Akami, simple javascript redirects can be created as a category in your OLTS store. The only necessary
+components are
+A: the URL you are redirecting to surrounded by <script>window.location.replace(URL HERE);</script> in the Category Name, and
+B: the External ID is the Category you want to direct visitors away from.
+
+
+
+
+The Short Name, Category Type, and all the tabs can be left alone.
+
+
+Sub-Category
+The Sub-Category is the products that will appear on the view items page after clicking on one of the Category links on the left navigation.
+
+
+
+
+A: The Sub-Category as it appears in your store in Sales Channel
+B: Category Name will appear as the product name on the view items page on the left hand rail next to the navigation.
+C: The Short Name will appear as the product name in the full details of the individual product.
+D: Long Description is where you enter the full details legal provided by the Ecommerce team.
+
+The Description block in the Description tab is rarely used but can sometimes be used for putting additional information such as links to external calendars
+or files that pertain to the product. The rest of the tabs can be ignored, though once again the Transaction tab can be used to overwrite settings in higher
+level Transaction tabs.
+
+
+PLU
+The PLU is the product code and configuration itself, most of which is configured by PPI.
+A: The PLU as it appears in your store in Sales Channel.
+B: Detail Name is the name that appears in the right hand rail of the view items page next to the price of the product as well as the name that appears
+throughout the checkout process. Take note that if you do not supply a name Galaxy will automatically generate an ID number for this product which will
+appear on the front end website.
+C: The Short Name will also appear on the right hand rail of the view items page, however this is the only place in all of OLTS where this name will appear.
+Unlike the Detail Name this field is also not required and can be left blank.
+D: This is where you attach the PLU which is similar to most other Sales Channels. Simply click on the ellipses, search for the provided PLU number, and
+hit ok. Parts of the configuration done by PPI such as the price, a calendar if the product has one, and the PLU Event name will appear in other parts of
+your store.
+
+As always, the rest of the tabs can be ignored though the Transaction tab can be used to overwrite settings in higher level Transaction tabs (this is the
+lowest level tab you can use to limit how many of an individual product a customer can buy).
+
+                                                                                                                                                            Top
+
+
+
+Misc. Knowledge
+Custom HTML, CSS, Javascript, and Jquery, including calling external files, can be used in OLTS through Galaxy alone. This will likely become necessary
+as much of OLTS is built using master files that cannot be edited without affecting all OLTS stores. Most of this customization including links to external
+files can be done in the Web Page HTML files of your stores Merchant.
+
+
+PLU Names
+*As of 1/7/2020, a permanent fix has been created and the following section can be ignored.
+
+A few possible and complicated problems that can appear is the naming of products in your store. This can thankfully be resolved with some CSS and
+proper naming of your PLU's depending on the situation.
+
+      1. The first problem comes from the Detail Name of your PLU's. While the view items page only pulls your PLU Detail Name and Short Name on the
+         right hand side, throughout the checkout process such as the Cart, Order Review, Order Confirmation, P@H Assignment, etc. it will pull both the
+         Detail Name on your PLU as well as the PLU Event name (which you can view by going to Item Manager in MWS, looking up your PLU and
+         clicking on Additional Options) provided by PPI. This can result in products having redundant naming in the checkout process, such as a product
+         that has a PLU Detail Name of Universal Dining Plan showing up in the cart as Universal Dining Plan Universal Dining Plan. The solution to
+         this is to keep the Detail Name short and simple, such as Adult or Child, which will then show in the cart as Universal Dining Plan Adult.
+      2. The second problem comes when the product is a calendared item. Regardless of whether it is a resource managed or variable priced item, when
+         a PLU has a calendar it will cause the PLU Event name given by PPI to not be pulled throughout the checkout process. This can result in a
+         product such as the Marvel Character Dinner which has a PLU Detail Name of Adult showing up only as Adult in the cart. The solution to this is
+         to include a full product name in the PLU Detail Name field along with the shorter nondescript information such as the word Adult.
+      3. The third problem is that when a store includes both calendared and non-calendared items, the above two solutions conflict with each other. The
+         first solution means some products will not have a descriptive enough name in the checkout process such as the Marvel Character Dinner, while
+         the second solution results in the way products appear in the view items page mismatching with each other as some will have a full product name
+         while others will only have the short nondescript name. The image below shows the Cart page with the PLU Detail Name highlighted in red.
+
+
+
+
+         The Universal Dining Plan does not have a calendar and as such the PLU Detail Name is only the word Adult, while the rest of the name is given
+         by PPI. The "Adult" and Halloween Horror Night tickets however have a calendar, causing the Event name given by PPI to not appear and
+         resulting in the Marvel Character Dinner Adult ticket only appearing as the word "Adult" while the HHN ticket which has its full name set as the
+         PLU Detail Name shows correctly. The solution to this problem is to use the nondescript name for both the Detail Name and Short Name of any
+         PLU that DOES NOT have a calendar, the full product name for the Detail Name with nondescript name BUT ONLY the nondescript name as the
+         Short Name for a PLU WITH a calendar, and using CSS to the hide the ".pluName" class with a "display: none;" rule. The ".pluName" class only
+         appears on the View Items page and shows the PLU Detail Name. By hiding it visitors will only see the Short Name which is consistent between
+         all products and does not appear anywhere else other than the View Items page, while the checkout process will show the above two solutions for
+         the PLU Detail Name.
+
+
+                 Note
+
+                 In rare cases, a PLU may not be built as an Event and therefore not include an Event name. When this happens the checkout process
+                 will pull both the PLU Detail Name AND the Category Name of the SUB-CATEGORY the PLU is under (for example, a Sub-Category
+                 called "CityWalk EVE" and a PLU named "EVE 1 Night" will show in the cart as "CityWalk EVE EVE 1 Night"). The simplest is to use
+                 the correct Sub-Category name in the Sub-Category Description and using CSS to modify or hide the Sub-Category Category Name.
+Promotions
+When using a Promotion instead of a Merchant for an OLTS store (such as with the Florida Resident Blue Man Group and the American Express Blue Man
+Group stores), be sure to use a link that points to a Category within the store. It is possible to reach the Promotion Page itself for such a store but doing so
+will break the stores navigation as no navigation is pulled for the store, instead either using one already existing in the visitors cache or failing to load the
+store entirely if none exist. By pointing to a Category the store navigation will be pulled and then the visitor is immediately redirected to the Promotion,
+preventing this problem.
+
+
+Card Controls
+You can use radio groups and drop down lists to more neatly organize and display products in your OLTS store. This can be done by adding a promotion
+to the Category you would like to organize and selecting one of the existing "Card Controls" as the promotion, then attaching a <span class></span> tag
+to either your Sub-Category or your PLU and providing appropriate grouping names. You can also create and customize your own Card Controls which
+exist as javascript files on the OLTS server.
+
+
+Images
+Images can be attached to your OLTS store (such as in the Gift Card store) by adding an HTML <img src="SOURCE-HERE"> tag. This tag can be placed
+almost anywhere you would normally display text on the front end of the store, such as the Category Description with the Gift Card store or even in a
+Category Name as with the Latin store.
+
+                                                                                                                                                             Top
+
